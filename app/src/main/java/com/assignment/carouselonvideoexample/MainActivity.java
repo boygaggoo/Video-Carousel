@@ -8,9 +8,11 @@ import android.view.MotionEvent;
 
 import com.afollestad.easyvideoplayer.EasyVideoCallback;
 import com.afollestad.easyvideoplayer.EasyVideoPlayer;
+import com.assignment.carouselonvideoexample.adapters.ImagesCarouselRecyclerViewAdapter;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -19,6 +21,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
 {
     private String URL = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+    ArrayList<String> imagesUrls = new ArrayList<>();
 
     @BindView(R.id.easyVideoPlayer)
     EasyVideoPlayer easyVideoPlayer;
@@ -139,5 +142,13 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        for (int index = 0; index < 7; index++)
+        {
+            imagesUrls.add("https://picsum.photos/300/200");
+        }
+
+
+        rvImages.setAdapter(new ImagesCarouselRecyclerViewAdapter(imagesUrls, MainActivity.this));
     }
 }
