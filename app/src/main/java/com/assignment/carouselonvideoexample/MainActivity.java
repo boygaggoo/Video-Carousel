@@ -3,9 +3,15 @@ package com.assignment.carouselonvideoexample;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 
 import com.afollestad.easyvideoplayer.EasyVideoCallback;
 import com.afollestad.easyvideoplayer.EasyVideoPlayer;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
+
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +23,9 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.easyVideoPlayer)
     EasyVideoPlayer easyVideoPlayer;
 
+    @BindView(R.id.rvImages)
+    DiscreteScrollView rvImages;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,6 +33,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initializeVideoPlayer();
+        initializeCarouselImages();
     }
 
     private void initializeVideoPlayer()
@@ -87,6 +97,44 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onSubmit(EasyVideoPlayer player, Uri source)
+            {
+
+            }
+        });
+    }
+
+    private void initializeCarouselImages()
+    {
+        rvImages = (DiscreteScrollView) findViewById(R.id.rvImages);
+        rvImages.setOffscreenItems(3);
+        rvImages.setItemTransformer(new ScaleTransformer.Builder().setMinScale(0.7f).build());
+
+        rvImages.setHasFixedSize(true);
+        rvImages.setNestedScrollingEnabled(false);
+
+        rvImages.addOnItemTouchListener(new RecyclerView.OnItemTouchListener()
+        {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e)
+            {
+                int action = e.getAction();
+                switch (action)
+                {
+                    case MotionEvent.ACTION_MOVE:
+                        rv.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e)
+            {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept)
             {
 
             }
