@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.assignment.carouselonvideoexample"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -24,7 +26,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:27.+'
+    compile 'com.android.support:appcompat-v7:26.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.afollestad:easyvideoplayer:0.3.0'
     testCompile 'junit:junit:4.12'
 }
