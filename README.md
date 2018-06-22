@@ -9,16 +9,16 @@ The App has following features:
 - runs carousel from online images
 - Next and Previous buttons to move images on carousel
 
-##### Activities
+#### Activities
 - MainActivity
 
-##### Adapters
+#### Adapters
 - ImagesCarouselRecyclerViewAdapter
 
-##### Permissions
+#### Permissions
 - INTERNET
 
-##### Libraries Used
+#### Libraries Used
 - ButterKnife (Binding views)
 - PICASSO (Image buffering library)
 - EasyVideoPlayer (Video buffering library)
