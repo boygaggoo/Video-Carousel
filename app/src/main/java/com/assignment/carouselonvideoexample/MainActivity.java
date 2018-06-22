@@ -145,9 +145,8 @@ public class MainActivity extends AppCompatActivity
 
         for (int index = 0; index < 7; index++)
         {
-            imagesUrls.add("https://picsum.photos/300/200");
+            imagesUrls.add("https://picsum.photos/" + (new Random().nextInt(500) + 1) + "/" + (new Random().nextInt(500) + 1));
         }
-
 
         rvImages.setAdapter(new ImagesCarouselRecyclerViewAdapter(imagesUrls, MainActivity.this));
     }

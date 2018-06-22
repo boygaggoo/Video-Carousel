@@ -60,8 +60,8 @@ public class ImagesCarouselRecyclerViewAdapter extends RecyclerView.Adapter<Imag
         {
             Picasso.get()
                     .load(imagesUrls.get(position))
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.error_placeholder)
                     .into(ivImage);
 
         }
