@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.afollestad.easyvideoplayer.EasyVideoCallback;
 import com.afollestad.easyvideoplayer.EasyVideoPlayer;
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.rvImages)
     DiscreteScrollView rvImages;
 
+    @BindView(R.id.ivNext)
+    ImageView ivNext;
+
+    @BindView(R.id.ivPrevious)
+    ImageView ivPrevious;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         initializeVideoPlayer();
         initializeCarouselImages();
+        initializingButtons();
     }
 
     private void initializeVideoPlayer()
@@ -149,5 +158,31 @@ public class MainActivity extends AppCompatActivity
         }
 
         rvImages.setAdapter(new ImagesCarouselRecyclerViewAdapter(imagesUrls, MainActivity.this));
+    }
+
+    private void initializingButtons()
+    {
+        ivNext.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                int targetAdapterPosition = (rvImages.getCurrentItem() + 1) % 7;
+                rvImages.smoothScrollToPosition(targetAdapterPosition);
+            }
+        });
+
+        ivPrevious.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                int scrollToPosition = rvImages.getCurrentItem() - 1;
+                if (scrollToPosition < 0)
+                    rvImages.smoothScrollToPosition(6);
+                else
+                    rvImages.smoothScrollToPosition(scrollToPosition);
+            }
+        });
     }
 }
